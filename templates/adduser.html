@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'login/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
+</head>
+<body>
+    <div class="main">
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <form method="POST" id="signup-form" class="signup-form">
+                        <h2 class="form-title">Add User</h2>
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <select type="text" class="form-input" name="status" id="name" placeholder="Manufacturer ID"/>  
+                                       <option value = "1">Admin</option>
+                                       <option value = "2">Manager</option>
+                                       <option value = "3">Sales Person</option>
+                            </select>                         
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="first_name" id="name" placeholder="First Name"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="last_name" id="name" placeholder="Last Name"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="username" id="name" placeholder="Username"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Email Address"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="password1" id="password" placeholder="Password"/>
+                            <span toggle="#password" class="zmdi zmdi-eye-off field-icon toggle-password"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="password2" id="re_password" placeholder="Repeat your password"/>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Add"/>
+                        </div>
+                        <div>
+                            {% for message in messages %}
+                            <h3><center>{{message}} </center> </h3>
+                            {% endfor %}
+                        </div>
+                    </form>
+                    <p class="loginhere">
+                        <a href="users" class="loginhere-link">See in the Users List</a>
+                    </p>
+                    <p class="loginhere">
+                        <a href="index" class="loginhere-link">Go back to home</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'login/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'login/js/main.js' %}"></script>
+     
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

@@ -1,0 +1,39 @@
+{% include "index.html" %}
+{% include "receipt.html" %}
+<style>
+	.right {
+	  position: absolute;
+  	  right: 40px;
+	}
+	.button {
+	  background-color: #4CAF50; /* Green */
+	  border: none;
+	  color: white;
+	  padding: 14px 25px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  transition-duration: 0.4s;
+	  cursor: pointer;
+	}
+
+	.button5 {
+	  border-radius: 4px;
+	  background-color: #555555;
+	  color: white;
+
+	}
+
+	.button5:hover {
+	  border-radius: 4px;
+	  background-color: white;
+	  color: black;
+	  border: 2px solid #555555;
+	}
+</style>
+<body>
+
+<a href="{% url 'phsys:receipt-download' id=sal.sbillno %}"><button class="button button5 right">Download</button></a>
+</body>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+</html>
+
+<head>
+	<style>
+	.right {
+	  position: absolute;
+  	  right: 40px;
+	}
+	.button {
+	  background-color: #4CAF50; /* Green */
+	  border: none;
+	  color: white;
+	  padding: 14px 25px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  transition-duration: 0.4s;
+	  cursor: pointer;
+	}
+
+	.button5 {
+	  border-radius: 4px;
+	  background-color: #555555;
+	  color: white;
+	  
+	}
+
+	.button5:hover {
+	  border-radius: 4px;
+	  background-color: white;
+	  color: black;
+	  border: 2px solid #555555;
+	}
+
+	</style>
+	<meta charset="UTF-8">
+	<title>Customer List</title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+</head>
+<body>
+{% include "index.html" %}
+	
+	<span><br>
+	<h1>Manufacturer List</h1>
+	<a href="addmanu"><button class="button button5 right">New Manufacturer</button></a>
+	</span>
+	<br>
+	<br>
+	<br>
+	<table class="table table-striped table-bordered table-sm">
+	<thread class= "thread-dark">
+	<tr>
+		<th>Manufacturer ID</th>
+		<th>Manufacturer Name</th>
+		<th>Manufacturer Address</th>
+        <th>Manufacturer Contact</th>
+        <th>Action</th>
+	</tr>
+	</thread>
+	{% for cus in parties %}
+	<tr>
+		<td>{{ cus.party_id }}</td>
+		<td>{{ cus.par_name }}</td>
+		<td>{{ cus.par_address }}</td>
+		<td>{{ cus.contact }}</td>
+		<td>
+		   <!--<a href="{% url 'phsys:update_manu' cus.party_id %}"><span class="btn btn-success">Edit</span></a>--> 
+			<a href="{% url 'phsys:delete_manu' cus.party_id %}" class='btn btn-danger'>Delete</a>
+		</td>
+	</tr>
+{% endfor %}
+	<tbody> 
+</body>

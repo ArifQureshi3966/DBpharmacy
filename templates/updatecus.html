@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Customer</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'login/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
+</head>
+<body>
+    <div class="main">
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                            <form method="POST" id="signup-form" class="signup-form" action="/update_cus/{{cus.cusid}}">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="text" class="form-input" value={{cus.cusid}} name="cus_id" id="name" placeholder="Customer ID" readonly/>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form-input" value={{cus.cus_name}} name="cus_name" id="name" placeholder="Name"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-input" value={{cus.cus_address}} name="cus_address" id="name" placeholder="Address"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-input" value={{cus.cus_contact}} name="cus_contact" id="contact" placeholder="Contact Number"/>
+                                </div>
+                                 <div class="form-group">
+                                    <input type="text" class="form-input" value={{cus.cus_email}} name="cus_email" id="email" placeholder="Email Address"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" name="submit" id="submit" class="form-submit" value="Update"/>
+                                </div>
+                                <div>
+                                    {% for message in messages %}
+                                    <h3><center>{{message}} </center> </h3>
+                                    {% endfor %}
+                                </div>
+                            </form>
+                    <p class="loginhere">
+                        <a href="{% url 'phsys:customer' %}" class="loginhere-link">Go back</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <!-- JS -->
+    <script src="{% static 'login/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'login/js/main.js' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

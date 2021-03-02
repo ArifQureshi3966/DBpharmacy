@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'login/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
+</head>
+<body>
+    <div class="main">
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <form method="POST" id="signup-form" class="signup-form">
+                        <h2 class="form-title">Login</h2>
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="username" id="name" placeholder="Username"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="password" id="password" placeholder="Password"/>
+                            <span toggle="#password" class="zmdi zmdi-eye-off field-icon toggle-password"></span>
+                        </div>
+                        <h2 class="form-title">Use these credentials to log in</h2>
+                        <div class="form-group">
+                            <table class='format'>
+                              <tr>
+                                <th>Username</th>
+                                <th>Pasword</th>
+                                <th>Role</th>
+                              </tr>
+                              <tr>
+                                <td>Mahnoor</td>
+                                <td>1234</td>
+                                <td>Admin</td>
+                              </tr>
+                              <tr>
+                                <td>Arif</td>
+                                <td>1234</td>
+                                <td>Manager</td>
+                              </tr>
+                              <tr>
+                                <td>Guest</td>
+                                <td>1234</td>
+                                <td>Sales Person</td>
+                              </tr>
+                              
+                            </table>
+                        </div>
+                         <div class="form-group">
+                            <input type="submit" name="submit" id="submit" style="cursor: pointer;" class="form-submit" value="Sign in"/>
+                        </div>
+                        <div>
+                            {% for message in messages %}
+                            <h3><center>{{message}} </center> </h3>
+                            {% endfor %}
+                        </div>
+                    </form>
+                    <p class="loginhere">
+                        Not Registered ? <a href="/" class="loginhere-link">Create Account</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'login/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'login/js/main.js' %}"></script>
+     
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

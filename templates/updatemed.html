@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Medicine</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'login/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
+</head>
+<body>
+    <div class="main">
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <form method="POST" id="signup-form" class="signup-form" action="/update_med/{{med.med_id}}" >
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" class="form-input" value= {{med.med_id}} name="med_id" id="name" placeholder="Medicine ID"readonly/>
+                        </div>
+                      
+                        <div class="form-group">
+                            <input type="text" class="form-input" value= {{med.g_name}} name="g_name" id="name" placeholder="Generic Name"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" value= {{med.m_title}} name="title" id="name" placeholder="Title"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" value= {{med.m_make}} name="manuf" id="name" placeholder="Manufacturer"/>
+                        </div>
+                         <div class="form-group">
+                            <input type="text" class="form-input" value= {{med.m_nature}} name="nature" id="name" placeholder="Nature"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" value= {{med.m_doze}} name="dose" id="name" placeholder="Dose"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" value= {{med.m_sprice}} name="price" id="name" placeholder="Price"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Update"/>
+                        </div>
+                        <div>
+                            {% for message in messages %}
+                            <h3><center>{{message}} </center> </h3>
+                            {% endfor %}
+                        </div>
+                    </form>
+                <p class="loginhere">
+                     <a href="{% url 'phsys:medicine' %}" class="loginhere-link">Go back</a>
+                </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <!-- JS -->
+    <script src="{% static 'login/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'login/js/main.js' %}"></script>
+     
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

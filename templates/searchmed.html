@@ -1,0 +1,128 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+</html>
+
+<head>
+	<style>
+	.right {
+	  position: absolute;
+  	  right: 40px;
+	}
+	.button {
+	  background-color: #4CAF50; /* Green */
+	  border: none;
+	  color: white;
+	  padding: 14px 25px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  transition-duration: 0.4s;
+	  cursor: pointer;
+	}
+
+	.button5 {
+	  border-radius: 4px;
+	  background-color: #555555;
+	  color: white;
+	  
+	}
+
+	.button5:hover {
+	  border-radius: 4px;
+	  background-color: white;
+	  color: black;
+	  border: 2px solid #555555;
+	}
+
+	</style>
+	<meta charset="UTF-8">
+	<title>Medicine List</title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+</head>
+<body>
+{% include "index.html" %}
+	<span><br>
+	<h1>Search in Medicine List</h1>
+	</span>
+	<table class="table table-striped table-bordered table-sm">
+	<thread class= "thread-dark">
+	<tr>
+		<th>Medicine ID</th>
+		<th>Generic Name</th>
+		<th>Title</th>
+		<th>Manufacturer</th>
+		<th>Nature</th>
+		<th>Dose</th>
+		<th>Price</th>
+		<th>Action</th>
+	</tr>
+	</thread>
+	{% for medicines in filter.qs %}
+	<tr>
+		<td>{{ medicines.med_id }}</td>
+		<td>{{ medicines.g_name }}</td>
+		<td>{{ medicines.m_title }}</td>
+		<td>{{ medicines.m_make }}</td>
+		<td>{{ medicines.m_nature }}</td>
+		<td>{{ medicines.m_doze }}</td>
+		<td>{{ medicines.m_sprice }}</td>
+		<td>
+			<a href="{% url 'phsys:update_med' medicines.med_id %}"><span class="btn btn-success">Edit</span></a>
+			<a href="{% url 'phsys:delete_med' medicines.med_id %}" class='btn btn-danger'>Delete</a>
+		</td>
+	</tr>
+    {% endfor %}
+<br>
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+
+			<form method="get" >
+				<div class="well">
+					<h4 style="margin-top: 0">Medicine Search</h4>
+					<div class="row">
+					  <div class="form-group col-sm-4 col-md-3">
+						{{ filter.form.med_id.label_tag }}
+						{% render_field filter.form.med_id class="form-control" %}
+					  </div>
+					  <div class="form-group col-sm-4 col-md-3">
+						{{ filter.form.g_name.label_tag }}
+						{% render_field filter.form.g_name class="form-control" %}
+					  </div>
+					  <div class="form-group col-sm-4 col-md-3">
+						{{ filter.form.m_title.label_tag }}
+						{% render_field filter.form.m_title class="form-control" %}
+					  </div>
+					  <div class="form-group col-sm-4 col-md-3">
+						{{ filter.form.m_make.label_tag }}
+						{% render_field filter.form.m_make class="form-control" %}
+					  </div>
+					  <div class="form-group col-sm-4 col-md-3">
+						{{ filter.form.m_nature.label_tag }}
+						{% render_field filter.form.m_nature class="form-control" %}
+					  </div>
+					  <div class="form-group col-sm-4 col-md-3">
+						{{ filter.form.m_doze.label_tag }}
+						{% render_field filter.form.m_doze class="form-control" %}
+					  </div>
+					  <div class="form-group col-sm-4 col-md-3">
+						{{ filter.form.m_sprice.label_tag }}
+						{% render_field filter.form.m_sprice class="form-control" %}
+					  </div>
+					</div>
+			  
+
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+
+		</div>
+	</div>
+	
+</div>
+<br>
+	<tbody> 
+</body>

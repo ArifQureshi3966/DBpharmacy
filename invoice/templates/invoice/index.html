@@ -1,0 +1,261 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Sidebar 05</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+    <link href= 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900' rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	.caret {
+	  cursor: pointer;
+	  -webkit-user-select: none; /* Safari 3.1+ */
+	  -moz-user-select: none; /* Firefox 2+ */
+	  -ms-user-select: none; /* IE 10+ */
+	  user-select: none;
+	}
+
+	.fa-angle-left{
+	  transform: rotate(0deg);
+	}
+
+	.notokay{
+	  transform: rotate(-90deg);  
+	}
+
+	.treeview-menu {
+	  display: none;
+	}
+
+	.active {
+	  display: block;
+	}
+
+	p.logout{
+		font-size: 18px;
+		color: #dfdfdf;
+	}
+
+	i.online{
+		color: #dfdfdf;
+	}
+	</style>
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+				<div class="p-4">
+		  		<center><h1><a href="#" class="logo">User<br><span><i class="fa fa-circle text-success online" style='transform: scale(0.5);'></i>Online</span></center></a>
+	        <ul class="list-unstyled components mb-5">
+
+	    <!-- Home  -->   	
+
+	          <li class="active">
+	            <a href="{%url 'phsys:index' %}"><span class="fa fa-home mr-3"></span>Home</a>
+	          </li>
+
+		<!-- Invoice  -->
+
+	          <li class="treeview">
+					<a class = 'caret'>
+						<span class="fa fa-balance-scale mr-3" >
+						</span>Invoice
+						<i class="fa fa-angle-left pull-right">
+						</i>
+					</a>
+					<ul class="treeview-menu">
+						{% if request.user.is_staff %}
+						<li class="treeview  "><a href="{% url 'invoice:invoice-create' %}">New Invoice</a></li>
+						{% endif %}
+						<li class="treeview  "><a href="{% url 'invoice:invoice-list' %}">Manage Invoice </a></li>
+					</ul>
+			  </li>
+		
+		<!-- Customer  -->
+
+			  <li class="treeview">
+					<a class = 'caret'>
+						<span class="fa fa-user mr-3" >
+						</span>Customer
+						<i class="fa fa-angle-left pull-right">
+						</i>
+					</a>
+					<ul class="treeview-menu">
+						{% if request.user.is_staff %}
+						<li class="treeview  "><a href="addcus">Add Customer</a></li>
+						{% endif %}
+						<li class="treeview  "><a href="customer">Manage Customer </a></li>
+					</ul>
+			  </li>
+
+		<!-- Medicine  -->
+
+			  <li class="treeview">
+					<a class = 'caret'>
+						<span class="fas fa-pills mr-3" >
+						</span>Medicine
+						<i class="fa fa-angle-left pull-right">
+						</i>
+					</a>
+					<ul class="treeview-menu">
+						{% if request.user.is_staff %}
+						<li class="treeview  "><a href="addmed">Add Medicine</a></li>
+						{% endif %}
+						<li class="treeview  "><a href="medicine">Manage Medicine</a></li>
+					</ul>
+			  </li>
+
+		<!-- Manufacturer  -->
+		      {% if request.user.is_staff %}
+			  <li class="treeview">
+					<a class = 'caret'>
+						<span class="fa fa-user mr-3" >
+						</span>Manufacturer
+						<i class="fa fa-angle-left pull-right">
+						</i>
+					</a>
+					<ul class="treeview-menu">
+						<li class="treeview  "><a href="addmanu">Add Manufacturer</a></li>
+						<li class="treeview  "><a href="manufacturer">Manage Manufacturer</a></li>
+					</ul>
+			  </li>
+			  {% endif %}
+
+		<!-- Purchase  -->
+		      {% if request.user.is_staff %}
+			  <li class="treeview">
+					<a class = 'caret'>
+						<span class="fas fa-cart-plus mr-3" >
+						</span>Purchase
+						<i class="fa fa-angle-left pull-right">
+						</i>
+					</a>
+					<ul class="treeview-menu">
+						<li class="treeview  "><a href="addpurchase">Add Purchase</a></li>
+						<li class="treeview  "><a href="purchase">Manage Purchase</a></li>
+					</ul>
+			  </li>
+			  {% endif %}
+
+		<!-- Sale  -->
+		      
+			  <li class="treeview">
+					<a class = 'caret'>
+						<span class="far fa-money-bill-alt mr-3" >
+						</span>Sale
+						<i class="fa fa-angle-left pull-right">
+						</i>
+					</a>
+					<ul class="treeview-menu">
+						<li class="treeview  "><a href="#">Add Sale</a></li>
+						<li class="treeview  "><a href="sale">Manage Sale</a></li>
+					</ul>
+			  </li>
+			  
+
+		<!-- Report  -->
+
+			  <li class="treeview">
+					<a class = 'caret'>
+						<span class="fa fa-file-text-o mr-3" >
+						</span>Report
+						<i class="fa fa-angle-left pull-right">
+						</i>
+					</a>
+					<ul class="treeview-menu">
+						<li class="treeview  "><a href="#">Sales Report</a></li>
+						<li class="treeview  "><a href="#">Purchase Report</a></li>
+					</ul>
+			  </li>
+
+		<!-- Payment  -->
+
+			  <li>
+	              <a href="#"><span class="	far fa-credit-card mr-3"></span> Payment</a>
+	          </li>
+
+	    <!-- Search  -->
+		      
+			  <li class="treeview">
+					<a class = 'caret'>
+						<span class="fa fa-search mr-3" >
+						</span>Search
+						<i class="fa fa-angle-left pull-right">
+						</i>
+					</a>
+					<ul class="treeview-menu">
+						<li class="treeview  "><a href="searchmed">Medicine</a></li>
+						<li class="treeview  "><a href="searchcus">Customer</a></li>
+					</ul>
+			  </li>
+
+		<!-- Settings  -->
+		      {% if request.user.is_superuser %}
+			  <li class="treeview">
+					<a class = 'caret'>
+						<span class="fa fa-wrench mr-3" >
+						</span>Settings
+						<i class="fa fa-angle-left pull-right"></i>
+					</a>
+					<ul class="treeview-menu">
+
+					<!-- Users  -->
+						
+					<li class="treeview  ">
+					<a class = 'caret'>Users
+					<i class="fa fa-angle-left pull-right"></i>
+					</a>
+					<ul class="treeview-menu">
+					<li class="treeview  "><a href="#">Add User</a></li>
+					<li class="treeview  "><a href="#">Manage Users</a></li>
+					</ul>
+					</li>
+
+			
+			  </li>
+			  {% endif %}
+
+
+			  <script>
+				var toggler = document.getElementsByClassName("caret");
+				var i;
+
+				for (i = 0; i < toggler.length; i++) {
+				  toggler[i].addEventListener("click", function() {
+				    this.parentElement.querySelector(".treeview-menu").classList.toggle("active");
+				    this.parentElement.querySelector(".fa-angle-left").classList.toggle("notokay");
+				  });
+				}
+
+
+			  </script>
+
+		
+	        </ul>
+	          <a href="logout"><p class='logout'>Logout</p></a>
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+      
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
