@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+</html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+     <link href="{% static 'css/bulma-calendar.min.css' %}" rel="stylesheet">
+     <link href="{% static 'js/bulma-calendar.min.js' %}" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <style>
+
+    .right {
+      position: absolute;
+      right: 40px;
+    }
+
+    .btn-work {
+        width: 150px;
+        height: 50px;
+        margin: 0 auto;
+        vertical-align: middle;
+        text-align: center; 
+        color:white;
+    }
+
+    .btn-work1 {
+        width: 100px;
+        height: 50px;
+        margin: 0 auto;
+        vertical-align: middle;
+        text-align: center; 
+    }
+
+    .btn-work2  {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position:relative; 
+        top:-6px;
+    }
+
+    .button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+    }
+
+    .button5 {
+      border-radius: 4px;
+      background-color: #fff;
+      color: white;
+      text-align: center;
+      
+    }
+
+    .button5:hover {
+      border-radius: 4px;
+      background-color: grey;
+      color: blue;
+      border: 2px #555555;
+      text-align: center;
+    }
+
+    </style>
+    <meta charset="UTF-8">
+    <title>Medicine List</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+</head>
+<body>
+{% include "index.html" %}
+<form action="{% url 'invoice:invoice-list' %}" method="post">{% csrf_token %}<br>
+    <h1>Invoice List</h1>
+    <a href="{% url 'invoice:invoice-create' %}"><button class=" button5 right btn-work ">Create Invoice</a></button>
+    <br>
+    <br>
+    <br>
+    <table class="table table-striped table-bordered table-sm">
+        <thread class= "thread-dark">
+            <tr>
+                <th></th>
+                <th>INVOICE</th>
+                <th>CUSTOMER</th>
+                <th>DATE</th>
+                <th>DUE DATE</th>
+                <th>BALANCE</th>
+                <th>TOTAL</th>
+                <th>STATUS</th>
+                <th>View</th>
+                <th>DOWNLOAD</th>
+                <th>REMOVE</th>
+
+
+            </tr>
+        </thead>
+            {% for invoice in invoices %}
+            <tr>
+                <td><input class="checkbox" type="checkbox" value="{{invoice.id}}" name="invoice_id" size="1" />
+                </td>
+                <td width="1%">#{{invoice.id}}</td>
+                <td width="9%">{{invoice.customer}}</td>
+                <td> {{invoice.date}}</td>
+                <td> {{invoice.due_date}} </td>
+                <td width="1%"></td>
+                <td>{{invoice.total_amount}}</td>
+                <td class="level-right">
+                    {% if invoice.get_status %}
+                    <a class="button is-small is-success btn-work1" href="#">Paid</a>
+                    {% else %}
+                    <a class="button is-small is-warning btn-work1" href="#">Not Paid</a>
+                    {% endif %}
+                </td>
+                <td width="1%"><a href="{% url 'invoice:invoice-detail' id=invoice.id %}">
+                    <div class="button is-small is-info btn-work1">View</div>
+                </a></td>
+                <td width="1%"><a href="{% url 'invoice:invoice-download' id=invoice.id %}">Download</a></td>
+                <td>
+                    <a href="{% url 'invoice:invoice-delete' id=invoice.id %}" class='btn btn-danger'>X</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+            <div class="select is-rounded">
+                <select id="status" name="status">
+                    <option value="1">Paid</option>
+                    <option value="0">Not Paid</option>
+                </select>
+            </div>
+            <input class="button is-info is-rounded btn-work2" type="submit" value="Change Status" name="mybtn">
+
+</form>
+</body>
+

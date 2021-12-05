@@ -1,0 +1,206 @@
+{% extends "invoice/base.html" %}{% load bulma_tags %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'login/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
+</head>
+<body>
+    <div class="main">
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <form method="POST" id="signup-form" class="signup-form">
+                    <h2 class="form-title">Add Purchase</h2>
+                    {% csrf_token %}
+                        <div class="columns is-centered">
+                            <div class="column is-one-third">
+                                <input type="text" class="form-input" name="pno_id" id="name" placeholder="Purchase ID"/>
+                            </div>
+
+                            <div class="column is-one-third">
+                                <select type="text" class="form-input" name="make_id" id="name" placeholder="Manufacturer ID"/>  
+                                  <option value = "1">Manufacturer</option>
+                                           {% for medid in data1 %}
+                                           <option value = "{{medid.party_id}}">{{medid.par_name}}</option>
+                                           {% endfor %}
+            
+                                </select>                         
+                            </div>
+                            <div class="column is-one-third">
+                                <select type="text" class="form-input" name="user_id" id = "myList" placeholder="User ID"/>
+                                <option value = "1">User ID</option>
+                                           {% for medid in data2 %}
+                                           <option value = "{{medid.user_id}}">{{medid.user_id}}</option>
+                                           {% endfor %}
+            
+                                </select>
+                            </div>
+                        </div>
+                        <div class="columns is-centered">
+                            <div class="column is-one-third">
+                                Purchase date: <input class="input" type="date" name="p_date" placeholder="Purchase Date">
+                            </div>
+                            <div class="column is-one-third">
+                                <input type="text" class="form-input" name="purch_id" id="name" placeholder="Voucher No."/>
+                            </div>
+                            <div class="column is-one-third">
+                                <select type="text" class="form-input" name="med_id" id = "myList" placeholder="Medicine ID"/>
+                                <option value = "1">Medicine</option>
+                                           {% for medid in data %}
+                                           <option value = "{{medid.med_id}}">{{medid.g_name}}</option>
+                                           {% endfor %}
+            
+                                </select>
+                            </div>
+                        </div>
+                        <div class="columns is-centered">
+                            <div class="column is-one-third">
+                                <input type="text" class="form-input" name="batchno" id="name" placeholder="Batch No."/>
+                            </div>
+                            <div class="column is-one-third">
+                                Expiry date: <input class="input" type="date" name="ex_date" placeholder="Expiry Date">
+                            </div>
+                            <div class="column is-one-third">
+                                <input type="text" class="form-input" name="med_pri" id="name" placeholder="Medicine Price"/>
+                            </div>
+                        </div>
+                        <div class="columns is-centered">
+                            <div class="column is-one-third">
+                                <input type="text" class="form-input" name="qty" id="name" placeholder="Quantity"/>
+                            </div>
+                            <div class="column is-one-third">
+                                
+                                <input type="text" class="form-input" name="dis_pri" id="name" placeholder="Discount Price"/>
+                            </div>
+                            <div class="column is-one-third">
+                                <input type="text" class="form-input" name="net_rate" id="name" placeholder="Net Rate"/>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Create"/>
+                        </div>
+                        <div>
+                            {% for message in messages %}
+                            <h3><center>{{message}} </center> </h3>
+                            {% endfor %}
+                        </div>
+            
+                </form>
+                <p class="loginhere">
+                <a href="purchase" class="loginhere-link">Go to the Purchase List</ins></a>
+                </p>
+                <p class="loginhere">
+                    <a href="index" class="loginhere-link">Go back to Home</a>
+                </p>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}
+
+{% block custom_js %}
+   <!-- JS -->
+<script src="{% static 'login/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'login/js/main.js' %}"></script>
+<script type="text/javascript">
+    $('table input').on("input", function () {
+        var total = []
+        var $tr = $(this).closest('tr');
+        var textValue1 = $("input.rate", $tr).val();
+        var textValue2 = $('input.quantity', $tr).val();
+        amt = textValue1 * textValue2;
+        // console.log(amt);
+        $('.amount', $tr).html(amt);
+        calc_total();
+    });
+
+    function calc_total() {
+        var sum = 0;
+        $(".amount").each(function () {
+            sum += parseFloat($(this).text());
+        });
+        console.log(sum);
+        $('#total').text(sum);
+    }
+</script>
+
+
+<script type="text/javascript">
+    function updateElementIndex(el, prefix, ndx) {
+        var id_regex = new RegExp('(' + prefix + '-\\d+)');
+        var replacement = prefix + '-' + ndx;
+        if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+        if (el.id) el.id = el.id.replace(id_regex, replacement);
+        if (el.name) el.name = el.name.replace(id_regex, replacement);
+    }
+    function cloneMore(selector, prefix) {
+        var newElement = $(selector).clone(true);
+        console.log(newElement);
+        var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+        newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function () {
+            var name = $(this).attr('name')
+            if (name) {
+                name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                var id = 'id_' + name;
+                $(this).attr({ 'name': name, 'id': id }).val('').removeAttr('checked');
+            }
+        });
+        newElement.find('label').each(function () {
+            var forValue = $(this).attr('for');
+            if (forValue) {
+                forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                $(this).attr({ 'for': forValue });
+            }
+        });
+        total++;
+        $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+        $(selector).after(newElement);
+        // $("div.form-row.button.is-primary").not(":last").hide();
+        // var conditionRow = $('.form-row:not(:last)');
+        // conditionRow.find('.button.is-primary')
+        // .hide();
+        // .removeClass('btn-success').addClass('btn-danger')
+        // .removeClass('add-form-row').addClass('remove-form-row')
+        // .html('-');
+        return false;
+    }
+    function deleteForm(prefix, btn) {
+        var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        if (total > 1) {
+            btn.closest('.form-row').remove();
+            var forms = $('.form-row');
+            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+            for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).find(':input').each(function () {
+                    updateElementIndex(this, prefix, i);
+                });
+            }
+        }
+        return false;
+    }
+    $(document).on('click', '.add-form-row', function (e) {
+        e.preventDefault();
+        cloneMore('table tr:last', 'form');
+        return false;
+    });
+    $(document).on('click', '.remove-form-row', function (e) {
+        e.preventDefault();
+        deleteForm('form', $(this));
+        return false;
+    });
+
+</script>
+{% endblock %}

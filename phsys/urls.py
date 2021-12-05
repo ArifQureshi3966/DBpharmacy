@@ -1,0 +1,48 @@
+from django.urls import path
+from . import views
+from django_filters.views import FilterView
+from .filters import MedicineFilter,CustomerFilter
+#from .views import PurchaseDetailListView
+app_name = 'phsys'
+urlpatterns = [
+    path('', views.register, name = 'register'),
+    path('index', views.index, name = 'index'),
+    path('index2', views.index2, name = 'index2'),
+    path('index3', views.index3, name = 'index3'),
+    path('medicine', views.medicine, name = 'medicine'),
+    path('users', views.users, name = 'users'),
+    path('addmed', views.addmed, name = 'addmed'),
+    path('update_med/<str:pk>', views.update_med, name = 'update_med'),
+    path('delete_med/<med_id>', views.delete_med, name = 'delete_med'),
+    path('delete_cus/<cus_id>', views.delete_cus, name = 'delete_cus'),
+    path('delete_purchase/<purchase_id>', views.delete_purchase, name = 'delete_purchase'),
+    path('delete_user/<usname>', views.delete_user, name = 'delete_user'),
+    path('delete_sale/<sale_id>', views.delete_sale, name = 'delete_sale'),
+    path('delete_manu/<party_id>', views.delete_manu, name = 'delete_manu'),
+    path('update_cus/<str:pk>', views.update_cus, name = 'update_cus'),
+    path('update_manu/<str:pk>', views.update_manu, name = 'update_manu'),
+    path('customer', views.customer, name = 'customer'),
+    path('addcus', views.addcus, name = 'addcus'),
+    path('addpurchase', views.addpurchase, name = 'addpurchase'),
+    path('addmanu', views.addmanu, name = 'addmanu'),
+    path('addsale', views.addsale, name = 'addsale'),
+    path('adduser', views.adduser, name = 'adduser'),
+    path('purchase', views.purchase, name = 'purchase'),
+    path('purchase-detail/<id>', views.purchasedetail_trial, name='purchase-detail'),
+    path('purchase-download/<id>', views.generate_PDF_purchase, name='purchase-download'),
+    path('med-download', views.generate_PDF_med, name='med-download'),
+    path('sale', views.sale, name = 'sale'),
+    path('sale-detail/<id>', views.saledetail_trial, name='sale-detail'),
+    path('sale-download/<id>', views.generate_PDF_sale, name='sale-download'),
+    path('receipt-download/<id>', views.generate_PDF_receipt, name='receipt-download'),
+    path('searchmed', FilterView.as_view(filterset_class=MedicineFilter,
+        template_name='searchmed.html'), name = 'search_med'),
+    path('searchcus', FilterView.as_view(filterset_class=CustomerFilter,
+        template_name='searchcus.html'), name = 'search_cus'),
+    path('manufacturer', views.manufacturer, name = 'manufacturer'),
+    path('payment', views.payment, name = 'payment'),
+    path('receipt', views.receipt, name = 'receipt'),
+    path('receipt_pdf', views.receipt_pdf, name = 'receipt_pdf'),
+    path("logout", views.logout_request, name="logout"),
+    #path('purchasedetail-list', PurchaseDetailListView.as_view(), name="purchasedetail-list"),
+]
