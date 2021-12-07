@@ -3,7 +3,6 @@ Pharmacy Management System
 ![image](https://github.com/ArifQureshi3966/DBpharmacy/blob/main/images/CEP_P2_2017_EE_101_2017_EE_14510241024_1.jpg)
 ![image](https://github.com/ArifQureshi3966/DBpharmacy/blob/main/images/CEP_P2_2017_EE_101_2017_EE_14510241024_2.jpg)
 ![image](https://github.com/ArifQureshi3966/DBpharmacy/blob/main/images/CEP_P2_2017_EE_101_2017_EE_14510241024_3.jpg)
-![image](https://github.com/ArifQureshi3966/DBpharmacy/blob/main/images/CEP_P2_2017_EE_101_2017_EE_14510241024_4.jpg)
 ![image](https://github.com/ArifQureshi3966/DBpharmacy/blob/main/images/CEP_P2_2017_EE_101_2017_EE_14510241024_5.jpg)
 ![image](https://github.com/ArifQureshi3966/DBpharmacy/blob/main/images/CEP_P2_2017_EE_101_2017_EE_14510241024_6.jpg)
 ![image](https://github.com/ArifQureshi3966/DBpharmacy/blob/main/images/CEP_P2_2017_EE_101_2017_EE_14510241024_7.jpg)
